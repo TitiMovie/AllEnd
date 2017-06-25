@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.movietime.dao.MovieDao">
+	<select id="findOne" resultType="Movie">
+		SELECT * FROM movie
+		WHERE id = #{id}
+	</select>
+
+    <select id="findAll" resultType="Movie">
+        SELECT * FROM movie
+    </select>
+
+    <select id="findByTagName" resultType="Movie">
+        SELECT * FROM movie, tag_movie, tag
+        WHERE tag.name = #{tagName} AND tag_movie.tag_id = tag.id AND movie.id = tag_movie.movie_id
+    </select>
+</mapper>
