@@ -1,0 +1,68 @@
+﻿<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Login</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+	<link href="css/homepage/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/common.css" rel="stylesheet" type="text/css" media="all" />
+
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/post.js"></script>
+	<script src="js/validator.js"></script>
+	<script src="js/login/login.js"></script>
+</head>
+<body>
+<div class="container">
+	<div class="container_wrap">
+		<div class="header_top">
+			<div class="col-sm-3 logo"><a href="/"><img src="images/nav/logo.png" alt=""/></a></div>
+			<div class="col-sm-6 nav"></div>
+			<div class="col-sm-3 header_right">
+				<ul class="header_right_box">
+					<li>
+						<img th:if="${username} != null" th:src="@{${usericon_path}}" alt="icon"/>
+					</li>
+					<li><p>
+						<a th:href="@{/}" th:if="${username} != null" th:text="${username}"></a>
+						<a th:href="@{/login}" th:if="${username} == null">Login</a>
+					</p></li>
+					<li th:if="${username} == null" class="last"><i class="edit"> </i></li>
+					<div class="clearfix"> </div>
+				</ul>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<div class="content">
+			<div class="register">
+				<div class="col-md-6 login-left">
+					<h3>New Customers</h3>
+					<p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
+					<a class="acount-btn" href="/register">Create an Account</a>
+				</div>
+				<div class="col-md-6 login-right">
+					<h3>Registered Customers</h3>
+					<p>If you have an account with us, please log in.</p>
+					<form action="/login" method="POST">
+						<div>
+							<span>Email Address<label>*</label></span>
+							<input name="email" type="text" />
+							<span class="invalid_box" id="invalid_email">Invalid E-mail</span>
+						</div>
+						<div>
+							<span>Password<label>*</label></span>
+							<input name="password" type="password"/>
+						</div>
+						<input type="submit" value="Login"/>
+					</form>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
