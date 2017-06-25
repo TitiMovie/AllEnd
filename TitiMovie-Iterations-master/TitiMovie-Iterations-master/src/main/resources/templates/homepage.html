@@ -1,0 +1,115 @@
+﻿<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="icon" href="image/favor_icon.png" type="image/x-icon" />
+	<link rel="shortcut icon" href="image/favor_icon.png" type="image/x-icon" />
+
+	<!--frameworks-->
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+	<!--//frameworks-->
+
+	<link href="css/homepage/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/common.css" rel="stylesheet" type="text/css" media="all" />
+
+	<script src="js/post.js"></script>
+	<script src="js/homepage/clickMovie.js"></script>
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+	<!--headers for featureMovies-->
+	<link href="css/homepage/featureMoviesCSS/style_featureMovies.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/homepage/featureMoviesCSS/medile.css" rel='stylesheet' type='text/css' />
+	<!--//headers for featureMovies-->
+</head>
+<body>
+
+<div class="container">
+	<div class="container_wrap">
+		<div class="header_top">
+			<div class="col-sm-3 logo"><a href="/"><img src="images/nav/logo.png" alt=""/></a></div>
+			<div class="col-sm-6 nav"></div>
+			<div class="col-sm-3 header_right">
+				<ul class="header_right_box">
+					<li>
+						<img th:if="${username} != null" th:src="@{${usericon_path}}" alt="icon"/>
+					</li>
+					<li><p>
+						<a th:href="@{/}" th:if="${username} != null" th:text="${username}"></a>
+						<a th:href="@{/login}" th:if="${username} == null">Login</a>
+					</p></li>
+					<li class="last"><i class="edit"> </i></li>
+					<div class="clearfix"> </div>
+				</ul>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<div id="myCarousel" class="carousel slide">
+			<!-- 轮播（Carousel）指标 -->
+			<ol class="carousel-indicators">
+				<li th:each="banner,iterStat : ${bannerList}" data-target="#myCarousel" th:attr="data-slide-to=${iterStat.index}" th:classappend="${iterStat.first} ? active"></li>
+			</ol>
+			<!-- 轮播（Carousel）项目 -->
+			<div class="carousel-inner">
+				<div class="item" th:each="banner, iterStat : ${bannerList}" th:classappend="${iterStat.first} ? active">
+					<img th:src="@{${banner.path}}" th:alt="${iterStat.index} + ' ' + slide"/>
+					<div class="button">
+						<a th:name="${banner.name}" onclick="clickMovie(this)" class="hvr-shutter-out-horizontal">Buy Ticket</a>
+					</div>
+				</div>
+			</div>
+			<!-- 轮播（Carousel）导航 -->
+			<a class="carousel-control left" href="#myCarousel"
+			   data-slide="prev">&lsaquo;
+			</a>
+			<a class="carousel-control right" href="#myCarousel"
+			   data-slide="next">&rsaquo;
+			</a>
+		</div>
+		<script>$('.carousel').carousel()</script>
+
+		<div class="content">
+			<!--feature movies-->
+			<div class="general">
+				<h4 class="latest-text w3_latest_text">Featured Movies</h4>
+				<div class="container row">
+					<div class="col-md-12">
+						<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+							<ul id="myTab" class="featureMoviesNav featureMoviesNav-tabs" role="tablist" style="padding-left:0px; padding-bottom:10px">
+								<li role="presentation" th:each="panel : ${panelList}" th:classappend="(${panel.active} ? active)" class="tab"><a th:href="'#'+${panel.id}" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true" style="color:white" th:text="${panel.name}"></a></li>
+							</ul>
+							<div id="myTabContent" class="tab-content">
+								<div th:each="panel:${panelList}" role="tabpanel" class="tab-pane fade in" th:classappend="(${panel.active} ? active)" th:id="${panel.id}" aria-labelledby="home-tab">
+									<div class="w3_agile_featured_movies">
+										<div class="col-md-2 w3l-movie-gride-agile" th:each="movieItem : ${panel.movieList}">
+											<a th:name="${movieItem.name}" onclick="clickMovie(this)" class="hvr-shutter-out-horizontal">
+												<img th:src="@{${movieItem.poster_path}}" title="album-name" class="img-responsive" alt=" " />
+												<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+											</a>
+											<div class="mid-1 agileits_w3layouts_mid_1_home">
+												<div class="w3l-movie-text">
+													<h6><a th:name="${movieItem.name}" onclick="clickMovie(this)" th:text="${movieItem.name}"></a></h6>
+												</div>
+												<div class="mid-2 agile_mid_2_home">
+
+													<div class="clearfix"></div>
+												</div>
+											</div>
+											<div class="clearfix"> </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- //feature movies -->
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
