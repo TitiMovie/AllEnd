@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.movietime.dao.UserDao">
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user (email, icon_path, first_name, last_name, password)
+        VALUES (#{email}, #{iconPath}, #{firstName}, #{lastName}, #{password})
+    </insert>
+
+    <select id="findOne" resultType="User">
+        SELECT * FROM user
+        WHERE id = #{id}
+    </select>
+
+    <select id="findByUsername" resultType="User">
+        SELECT * FROM user
+        WHERE email = #{email}
+    </select>
+</mapper>
