@@ -1,0 +1,206 @@
+﻿<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>SelectSeat</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<!--frameworks-->
+	<script src="/js/jquery-2.1.4.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
+	<!--//frameworks-->
+
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<link href="/css/nav/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="/css/common.css" rel="stylesheet" type="text/css" media="all" />
+	<link href='/css/selectSeat/googleAPIStylesheet.css' rel='stylesheet' type='text/css' />
+	<link href="/css/selectSeat/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="/css/common.css" rel="stylesheet" type="text/css" media="all" />
+	<script src="/js/selectSeat/jquery.seat-charts.js"></script>
+	<script src="/js/selectSeat/jquery.nicescroll.js"></script>
+	<script src="/js/selectSeat/scripts.js"></script>
+	<script src="/js/post.js"></script>
+</head>
+<body>
+
+<div class="container">
+	<div class="container_wrap">
+		<div class="header_top">
+			<div class="col-sm-3 logo"><a href="/"><img src="/images/nav/logo.png" alt=""/></a></div>
+			<div class="col-sm-6 nav">
+				<ul>
+					<li> <span class="simptip-position-bottom simptip-movable" data-tooltip="comic"><a href="../movie.html"> </a></span></li>
+					<li><span class="simptip-position-bottom simptip-movable" data-tooltip="movie"><a href="../movie.html"> </a> </span></li>
+					<li><span class="simptip-position-bottom simptip-movable" data-tooltip="video"><a href="../movie.html"> </a></span></li>
+					<li><span class="simptip-position-bottom simptip-movable" data-tooltip="game"><a href="../movie.html"> </a></span></li>
+					<li><span class="simptip-position-bottom simptip-movable" data-tooltip="tv"><a href="../movie.html"> </a></span></li>
+					<li><span class="simptip-position-bottom simptip-movable" data-tooltip="more"><a href="../movie.html"> </a></span></li>
+				</ul>
+			</div>
+			<div class="col-sm-3 header_right">
+				<ul class="header_right_box">
+					<li>
+						<img th:if="${username} != null" th:src="@{${usericon_path}}" alt="icon"/>
+					</li>
+					<li><p>
+						<a style="cursor:default;" th:href="@{/}" th:if="${username} != null" th:text="${username}"></a>
+						<a href="/logout"><img th:if="${username} != null" src="/images/others/logout.png"
+											   style="width:20px; margin-left: 3px; height:25px;"/></a>
+						<a th:href="@{/login}" th:if="${username} == null">Login</a>
+					</p></li>
+					<li th:if="${username} == null" class="last"><i class="edit"> </i></li>
+					<div class="clearfix"> </div>
+				</ul>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<div class="content">
+			<div class="main">
+				<div class="demo">
+					<div id="seat-map">
+						<div class="front">SCREEN</div>
+					</div>
+					<div class="booking-details">
+						<ul class="book-left">
+							<li>Movie </li>
+							<li>Time </li>
+							<li>Tickets</li>
+							<li>Total</li>
+							<li>Seats :</li>
+						</ul>
+						<ul class="book-right">
+							<li th:text="${movie_name}">: </li>
+							<li th:text="${show_time}">: </li>
+							<li><span id="counter">0</span></li>
+							<li><b><i>$</i><span id="total">0</span></b></li>
+						</ul>
+						<div class="clear"></div>
+						<ul id="selected-seats" class="scrollbar scrollbar1"></ul>
+
+
+						<button class="checkout-button" onclick="proceed()">Book Now</button>
+						<div id="legend"></div>
+					</div>
+					<div style="clear:both"></div>
+				</div>
+
+				<script type="text/javascript" th:inline="javascript">
+                    selectedList = []
+                    show_id = [[${show_id}]]
+                    var price = [[${price}]]; //price
+                    $(document).ready(function() {
+                        var $cart = $('#selected-seats'), //Sitting Area
+                            $counter = $('#counter'), //Votes
+                            $total = $('#total'); //Total money
+
+                        var sc = $('#seat-map').seatCharts({
+                            map: [[${seatMap}]],
+                            naming : {
+                                top : false,
+                                getLabel : function (character, row, column) {
+                                    return column;
+                                }
+                            },
+                            legend : { //Definition legend
+                                node : $('#legend'),
+                                items : [
+                                    [ 'a', 'available',   'Available' ],
+                                    [ 'a', 'unavailable', 'Sold'],
+                                    [ 'a', 'selected', 'Selected']
+                                ]
+                            },
+                            click: function () { //Click event
+                                if (this.status() == 'available') { //optional seat
+                                    $('<li>Row'+(this.settings.row+1)+' Seat'+this.settings.label+'</li>')
+                                        .attr('id', 'cart-item-'+this.settings.id)
+                                        .data('seatId', this.settings.id)
+                                        .appendTo($cart);
+
+                                    selectedList.push({row:this.settings.row+1, col:this.settings.label})
+
+                                    $counter.text(sc.find('selected').length+1);
+                                    $total.text(recalculateTotal(sc)+price);
+
+                                    return 'selected';
+                                } else if (this.status() == 'selected') { //Checked
+                                    //Update Number
+                                    $counter.text(sc.find('selected').length-1);
+                                    //update totalnum
+                                    $total.text(recalculateTotal(sc)-price);
+
+                                    //Delete reservation
+                                    $('#cart-item-'+this.settings.id).remove();
+
+                                    findAndDelete(selectedList, {row:this.settings.row+1, col:this.settings.label});
+
+                                    //optional
+                                    return 'available';
+                                } else if (this.status() == 'unavailable') { //sold
+                                    return 'unavailable';
+                                } else {
+                                    return this.style();
+                                }
+                            }
+                        });
+                        //sold seat
+                        sc.get([[${soldSeat}]]).status('unavailable');
+
+                    });
+                    //sum total money
+                    function recalculateTotal(sc) {
+                        var total = 0;
+                        sc.find('selected').each(function () {
+                            total += price;
+                        });
+
+                        return total;
+                    }
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--seat taken dialog-->
+<div class="modal video-modal fade" id="seat_taken" tabindex="-1" role="dialog" aria-labelledby="myModal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<section>
+				<div class="modal-body">
+					<img class="center" style="width: 30%; height: 30%;" src="/images/selectSeat/cross.png"/>
+					<h1 class="bigFont center" style="text-align: center" id="errorMessage"></h1>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+<script>
+    nextURL = null;
+    $(function () { $('#seat_taken').on('hide.bs.modal', function () {
+        if (nextURL == null)
+            window.location.reload();
+        else
+            window.location.href = nextURL;
+    })});
+    $("#seat-map").attr("aria-activedescendant", "");
+</script>
+<!--//seat taken dialog-->
+<!--//payment failure dialog-->
+
+<!--no seat selected dialog-->
+<div class="modal video-modal fade" id="no_selected" tabindex="-1" role="dialog" aria-labelledby="myModal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<section>
+				<div class="modal-body">
+					<img class="center" style="width: 30%; height: 30%;" src="/images/selectSeat/cross.png"/>
+					<h1 class="bigFont center" style="text-align: center">You have not selected any seats</h1>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+<!--//no seat selected dialog-->
+</body>
+</html>
