@@ -1,0 +1,88 @@
+﻿<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>SelectShow</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!--frameworks-->
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+	<!--//frameworks-->
+
+	<link href="css/nav/style.css" rel="stylesheet" type="text/css" media="all"/>
+	<link href="css/selectShow/style.css" rel="stylesheet" type="text/css" media="all"/>
+	<link href="css/common.css" rel="stylesheet" type="text/css" media="all" />
+	<script src="js/selectShow/clickShow.js"></script>
+	<script src="js/post.js"></script>
+
+</head>
+<body>
+<div class="container">
+	<div class="container_wrap">
+		<div class="header_top">
+			<div class="col-sm-3 logo"><a href="/"><img src="images/nav/logo.png" alt=""/></a></div>
+			<div class="col-sm-6 nav"></div>
+			<div class="col-sm-3 header_right">
+				<ul class="header_right_box">
+					<li>
+						<img th:if="${username} != null" th:src="@{${usericon_path}}" alt="icon"/>
+					</li>
+					<li><p>
+						<a style="cursor:default;" th:href="@{/}" th:if="${username} != null" th:text="${username}"></a>
+						<a href="/logout"><img th:if="${username} != null" src="/images/others/logout.png"
+											   style="width:20px; margin-left: 3px; height:25px;"/></a>
+						<a th:href="@{/login}" th:if="${username} == null">Login</a>
+					</p></li>
+					<li th:if="${username} == null" class="last"><i class="edit"> </i></li>
+					<div class="clearfix"> </div>
+				</ul>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<div class="content">
+			<div class="now-showing-list">
+				<div class="col-md-4 movies-by-category movie-booking">
+					<div class="movie-ticket-book">
+						<div class="clearfix"></div>
+						<img th:src="@{${movie.posterPath}}" alt="poster" />
+						<div class="bahubali-details">
+							<h4>Release Date:</h4>
+							<p th:text="${movie.releaseDate}"></p>
+							<h4>Duration:</h4>
+							<p th:text="${movie.duration}"></p>
+							<h4>Director:</h4>
+							<p th:text="${movie.director}"></p>
+							<h4>Language:</h4>
+							<p th:text="${movie.language}"></p>
+							<h4>Genre:</h4>
+							<p th:text="${movie.genre}"></p>
+							<h4>Cast And Crew:</h4>
+							<p th:text="${movie.castAndCrew}"></p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8 movies-dates">
+					<div class="movie-date-selection" th:each="theater : ${theaterList}">
+						<ul>
+							<li class="location">
+								<span th:text="${theater.name} + ' Theater'"></span>
+							</li>
+							<li class="time" th:each="show : ${theater.showList}">
+								<a th:name="${theater.name}"
+								   th:href="'/selectSeat/cinema/' + ${theater.id} + '?movie_id=' + ${movie.id} + '&show_id=' + ${show.id}"
+								   th:text="${show.time}"></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
