@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://localhost:8080/payment -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Payment</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+
+	<!--frameworks-->
+	<script src="./Payment_files/jquery-2.1.4.min.js"></script>
+	<script src="./Payment_files/bootstrap.min.js"></script>
+	<link href="./Payment_files/bootstrap.css" rel="stylesheet" type="text/css">
+	<!--//frameworks-->
+
+	<link href="./Payment_files/style.css" rel="stylesheet" type="text/css" media="all">
+	<link href="./Payment_files/common.css" rel="stylesheet" type="text/css" media="all">
+	<link href="./Payment_files/style(1).css" rel="stylesheet" type="text/css" media="all">
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<script src="./Payment_files/scripts.js"></script>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body>
+
+
+<div class="container">
+	<div class="container_wrap">
+		<div class="header_top">
+			<div class="col-sm-3 logo"><a href="http://localhost:8080/"><img src="./Payment_files/logo.png" alt=""></a></div>
+			<div class="col-sm-6 nav">
+				<ul>
+					<li> <span class="simptip-position-bottom simptip-movable" data-tooltip="comic"><a href="http://localhost:8080/movie.html"> </a></span></li>
+					<li><span class="simptip-position-bottom simptip-movable" data-tooltip="movie"><a href="http://localhost:8080/movie.html"> </a> </span></li>
+					<li><span class="simptip-position-bottom simptip-movable" data-tooltip="video"><a href="http://localhost:8080/movie.html"> </a></span></li>
+					<li><span class="simptip-position-bottom simptip-movable" data-tooltip="game"><a href="http://localhost:8080/movie.html"> </a></span></li>
+					<li><span class="simptip-position-bottom simptip-movable" data-tooltip="tv"><a href="http://localhost:8080/movie.html"> </a></span></li>
+					<li><span class="simptip-position-bottom simptip-movable" data-tooltip="more"><a href="http://localhost:8080/movie.html"> </a></span></li>
+				</ul>
+			</div>
+			<div class="col-sm-3 header_right">
+				<ul class="header_right_box">
+					<li>
+						<img src="./Payment_files/p1.png" alt="icon">
+					</li>
+					<li><p>
+						<a style="cursor:default;" href="http://localhost:8080/">Amy  </a>
+						<a href="http://localhost:8080/logout"><img src="./Payment_files/logout.png" style="width:20px; margin-left: 3px; height:25px;"></a>
+						
+					</p></li>
+					
+					<div class="clearfix"> </div>
+				</ul>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<div class="content">
+			<div class="row">
+				<div class="main-content">
+					<div class="e-payment-section">
+						<form action="http://localhost:8080/try_finish_payment" method="post">
+							<div class="col-md-8 payment-left">
+							<div class="confirm-details">
+								<h3>Confirm Your Contact Details</h3>
+								<input type="text" name="email" value="Email address" onfocus="this.value = &#39;&#39;;" onblur="if (this.value == &#39;&#39;) {this.value = &#39;Email address&#39;;}">
+								<input type="text" name="phone" value="Mobile number" onfocus="this.value = &#39;&#39;;" onblur="if (this.value == &#39;&#39;) {this.value = &#39;Mobile number&#39;;}">
+								<p><i>Your number will be used for transaction confirmations And none of those painful promotions.</i></p>
+							</div>
+							<div class="payment-options">
+								<h3>payment-options</h3>
+								<div class="tabs-box">
+									<ul class="tabs-menu booking-menu">
+										<li><a href="http://localhost:8080/payment#tab1">Alipay</a></li>
+										<li><a href="http://localhost:8080/payment#tab2">Wepay</a></li>
+										<!--<li><a href="#tab3">Net Banking</a></li>-->
+										<li><a href="http://localhost:8080/payment#tab3">PayPal</a></li>
+									</ul>
+									<div class="clearfix"> </div>
+									<div class="tab-grids event-tab-grids">
+										<div id="tab1" class="tab-grid">
+											<img src="./Payment_files/alipay.png" alt="QRCode" style="height:300px; width:200px;">
+										</div>
+										<div id="tab2" class="tab-grid" style="display: none;">
+											<img src="./Payment_files/wechatPay.png" alt="QRCode" style="height:300px; width:200px;">
+										</div>
+										<div id="tab3" class="tab-grid" style="display: none;">
+											<div class="row">
+												<div class="col-md-6">
+													<img class="pp-img" src="./Payment_files/paypal.png" alt="Image Alternative text" title="Image Title">
+													<p>Important: You will be redirected to PayPal's website to securely complete your payment.</p>
+												</div>
+												<div class="col-md-6">
+														<div class="clearfix">
+															<div class="form-group form-group-cc-number">
+																<label>Card Number</label>
+																<input name="card_number" class="form-control" placeholder="xxxx xxxx xxxx xxxx" type="text"><span class="cc-card-icon"></span>
+															</div>
+															<div class="form-group form-group-cc-cvc">
+																<label>CVV</label>
+																<input name="cvv" class="form-control" placeholder="xxxx" type="text">
+															</div>
+														</div>
+														<div class="clearfix">
+															<div class="form-group form-group-cc-name">
+																<label>Card Holder Name</label>
+																<input name="card_holder_name" class="form-control" type="text">
+															</div>
+															<div class="form-group form-group-cc-date">
+																<label>Valid Thru</label>
+																<input name="valid_thru" class="form-control" placeholder="mm/yy" type="text">
+															</div>
+														</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+
+								<script>
+                                    $(document).ready(function() {
+                                        $("#tab2").hide();
+                                        $("#tab3").hide();
+                                        $("#tab4").hide();
+                                        $(".tabs-menu a").click(function(event){
+                                            event.preventDefault();
+                                            var tab=$(this).attr("href");
+                                            $(".tab-grid").not(tab).css("display","none");
+                                            $(tab).fadeIn("slow");
+                                        });
+                                    });
+								</script>
+
+							</div>
+						</div>
+							<div class="col-md-4">
+							<div class="payment-right" id="summary">
+								<h3>Ticket Summary</h3>
+								<p><span>Movie:</span></p><div style="display: inline">Baahubali</div><p></p>
+								<p><span>Theatre:</span></p><div style="display: inline">Lorem Ipsum</div><p></p>
+								<p><span>Location:</span></p><div style="display: inline">Trivandrum, Trivandrum</div><p></p>
+								<p><span>Date:</span></p><div style="display: inline">Sat, 8 Aug, 2015</div><p></p>
+								<p><span>Time:</span></p><div style="display: inline">11:30am</div><p></p>
+								<p><span>Seat Info:</span></p><div style="display: inline">Balkani-s12(a)</div><p></p>
+								<h4><span>Total :</span><div style="display: inline">RMB 150</div></h4>
+								<p>+ (Internet handling fees : RMB. 42.00 (incl. of service Tax))</p>
+								<h5>Grand Total :RMB. 192</h5>
+							</div>
+							<div class="ticket-note">
+								<h3>Note:</h3>
+								<ol>
+									<li><p>Registrations/Tickets once booked cannot be exchanged, cancelled or refunded.</p></li>
+									<li><p>In case of Credit/Debit Card bookings, the Credit/Debit Card and Card holder must be present at the ticket counter while collecting the ticket(s).</p></li>
+								</ol>
+							</div>
+						</div>
+							<div class="clearfix"></div>
+							<div id="proceed" class="btn btn-primary" onclick="proceed()" style="float:right">Proceed Payment</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--payment success Dialog-->
+<div class="modal video-modal fade" id="succeed" tabindex="-1" role="dialog" aria-labelledby="myModal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<section>
+				<div class="modal-body">
+					<img style="display: block; margin-right:auto; margin-left:auto;" src="./Payment_files/success_payment.png">
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+<!--payment failure dialog-->
+<div class="modal video-modal fade" id="failure" tabindex="-1" role="dialog" aria-labelledby="myModal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<section>
+				<div class="modal-body">
+					<div class="modal-body">
+						<img class="center" style="width: 30%; height: 30%;" src="./Payment_files/failure_payment_icon.png">
+						<h1 class="bigFont center" style="text-align: center" id="error_text"></h1>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+<!--//payment success dialog-->
+
+<script>
+    $(function () {
+        $('#succeed').on('hide.bs.modal', function () {
+            window.location.href = '/';
+        })
+    });
+    $(function () {
+        $('#failure').on('hide.bs.modal', function () {
+            window.location.reload();
+        })
+    });
+</script>
+
+
+</body></html>
