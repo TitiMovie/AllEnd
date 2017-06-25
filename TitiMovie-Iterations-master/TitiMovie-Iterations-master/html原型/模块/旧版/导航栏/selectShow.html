@@ -1,0 +1,129 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<link href="css/nav/bootstrap.css" rel='stylesheet' type='text/css' />
+	<link href="css/nav/style.css" rel="stylesheet" type="text/css" media="all" />
+	<!-- start plugins -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+	<link href='http://fonts.useso.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+	<script src="js/nav/responsiveslides.min.js"></script>
+	<script>
+        $(function () {
+            $("#slider").responsiveSlides({
+                auto: true,
+                nav: true,
+                speed: 500,
+                namespace: "callbacks",
+                pager: true,
+            });
+        });
+	</script>
+
+	<!--headers for featureMovies-->
+	<!--<link href="css/featureMoviesCSS/bootstrap.css" rel="stylesheet" type="text/css" media="all" />-->
+	<link href="css/featureMoviesCSS/style_featureMovies.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/featureMoviesCSS/medile.css" rel='stylesheet' type='text/css' />
+
+	<!-- pop-up -->
+	<!--<link href="css/featureMoviesCSS/popuo-box.css" rel="stylesheet" type="text/css" media="all" />-->
+	<!-- //pop-up -->
+
+	<!-- js -->
+	<script type="text/javascript" src="js/featureMoviesJS/jquery-2.1.4.min.js"></script>
+	<!-- //js -->
+	<!--//headers for featureMovies-->
+</head>
+<body>
+<!-- bootstrap-pop-up -->
+<div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				Sign In & Sign Up
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			</div>
+			<section>
+				<div class="modal-body">
+					<div class="w3_login_module">
+						<div class="module form-module">
+							<div class="toggle"><i class="fa fa-times fa-pencil"></i>
+								<div class="tooltip">Click Me</div>
+							</div>
+							<div class="form">
+								<h3>Login to your account</h3>
+								<form action="#" method="post">
+									<input type="text" name="Username" placeholder="Username" required="">
+									<input type="password" name="Password" placeholder="Password" required="">
+									<input type="submit" value="Login">
+								</form>
+							</div>
+							<div class="form">
+								<h3>Create an account</h3>
+								<form action="#" method="post">
+									<input type="text" name="Username" placeholder="Username" required="">
+									<input type="password" name="Password" placeholder="Password" required="">
+									<input type="email" name="Email" placeholder="Email Address" required="">
+									<input type="text" name="Phone" placeholder="Phone Number" required="">
+									<input type="submit" value="Register">
+								</form>
+							</div>
+							<div class="cta"><a href="#">Forgot your password?</a></div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+<script>
+    $('.toggle').click(function(){
+        // Switches the Icon
+        $(this).children('i').toggleClass('fa-pencil');
+        // Switches the forms
+        $('.form').animate({
+            height: "toggle",
+            'padding-top': 'toggle',
+            'padding-bottom': 'toggle',
+            opacity: "toggle"
+        }, "slow");
+    });
+</script>
+<!-- //bootstrap-pop-up -->
+
+<div class="container">
+	<div class="container_wrap">
+		<div class="header_top">
+			<div class="col-sm-3 logo"><a href="index.html"><img src="images/nav/logo.png" alt=""/></a></div>
+			<div class="col-sm-6 nav">
+				<ul>
+					<li> <span class="simptip-position-bottom simptip-movable" data-tooltip="comic"><a href="../movie.html"> </a></span></li>
+					<li><span class="simptip-position-bottom simptip-movable" data-tooltip="movie"><a href="../movie.html"> </a> </span></li>
+					<li><span class="simptip-position-bottom simptip-movable" data-tooltip="video"><a href="../movie.html"> </a></span></li>
+					<li><span class="simptip-position-bottom simptip-movable" data-tooltip="game"><a href="../movie.html"> </a></span></li>
+					<li><span class="simptip-position-bottom simptip-movable" data-tooltip="tv"><a href="../movie.html"> </a></span></li>
+					<li><span class="simptip-position-bottom simptip-movable" data-tooltip="more"><a href="../movie.html"> </a></span></li>
+				</ul>
+			</div>
+			<div class="col-sm-3 header_right">
+				<ul class="header_right_box">
+					<li><img src="images/nav/p1.png" alt=""/></li>
+					<li><p><a href="#" data-toggle="modal" data-target="#myModal">Login</a></p></li>
+					<li class="last"><i class="edit"> </i></li>
+					<div class="clearfix"> </div>
+				</ul>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<div class="content">
+
+		</div>
+	</div>
+</div>
+</div>
+
+</body>
+</html>

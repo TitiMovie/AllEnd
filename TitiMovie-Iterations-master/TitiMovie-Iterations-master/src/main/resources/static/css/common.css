@@ -1,0 +1,21 @@
+.center {
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bigFont {
+    font-size: 2em;
+}
+
+.invalid_box {
+    color: red !important;
+    visibility: hidden;
+}
+
+button {
+    cursor: pointer;
+}
+a {
+    cursor: pointer;
+}
